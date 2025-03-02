@@ -1,5 +1,7 @@
 import { Server } from 'socket.io';
-import { startGridGeneration, stopGridGeneration, setBiasChar } from '../grid.service';
+import { GridService } from '../Grid/grid.service';
+
+const gridSrv: GridService = new GridService();
 
 type Client = {
     id: string;
@@ -20,11 +22,11 @@ export const socketConnection = (server: any) => {
         console.log(`Socket connected: ${socket.id}`);
         clients.push({ id: socket.id });
 
-        if (clients.length == 1) startGridGeneration();
+        if (clients.length == 1) gridSrv.startGridGeneration();
 
         socket.on('setBias', (char: string) => {
             if (/^[a-z]$/.test(char)) {
-                socket.emit('gridUpdate', setBiasChar(char));
+                socket.emit('gridUpdate', gridSrv.setBiasChar(char));
             }
         });
 
@@ -32,7 +34,7 @@ export const socketConnection = (server: any) => {
             console.log(`Socket disconnected: ${socket.id}`);
             const index = clients.findIndex(c => c.id === socket.id);
             if (index !== -1) clients.splice(index, 1);
-            if (clients.length == 0) stopGridGeneration();
+            if (clients.length == 0) gridSrv.stopGridGeneration();
         });
     });
 }

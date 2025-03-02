@@ -1,10 +1,10 @@
 // Importação dos módulos necessários
 import { socketConnection } from './utils/socket-io';
-import {currentGrid, getCode} from './grid.service';
 import express from 'express';
-import { generateGrid } from './grid.service';
 import cors from 'cors';
 import http from 'http';
+import gridRoutes from './Grid/grid.routes';
+import paymentRoutes from './Payment/payment.routes';
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,13 +20,9 @@ app.get('/', (req, res) => {
   res.send('Hello world!');
 });
 
-app.get('/grid', (req, res) => {
-  res.json(currentGrid);
-});
-
-app.get('/test-code', (req, res) => {
-  res.send(getCode());
-});
+// APP ROUTES
+app.use('/grid', gridRoutes);
+app.use('/payment', paymentRoutes);
 
 server.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
