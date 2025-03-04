@@ -1,9 +1,12 @@
+import { GridService } from '../Grid/grid.service';
 import { Payment } from './payment.model';
 import { v4 as uuidv4 } from 'uuid';
 
 let payments: Payment[] = [];
 
 export class PaymentService {
+    gridSrv: GridService = new GridService();
+
     getAll(): Payment[] {
         return payments;
     }
@@ -15,6 +18,8 @@ export class PaymentService {
     create(payment: Payment): Payment {
         payment.id = uuidv4();
         payment.created_at = new Date();
+        payment.code = this.gridSrv.getCode();
+        payment.grid = this.gridSrv.getCurrentGrid();
         payments.push(payment);
         return payment;
     }

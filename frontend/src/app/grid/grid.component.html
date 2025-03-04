@@ -1,0 +1,32 @@
+<form [formGroup]="generalForm">
+    <div class="controls">
+        <div class="input-group">
+            <label for="char">Character</label>
+            <input id="char" type="text" (input)="changeChar($event)" formControlName="char" placeholder="Character"
+                maxlength="1" />
+        </div>
+        <div class="clock">🕒</div>
+        <button class="button" (click)="generateGrid()">Generate 2D Grid</button>
+    </div>
+</form>
+
+<table>
+    <tbody>
+        @for (row of gridData; track $index) {
+        <tr>
+            @for (column of row; track $index) {
+            <td>{{column}}</td>
+            }
+        </tr>
+        }
+    </tbody>
+</table>
+
+<div class="status">
+    @if(live) {
+    <span class="live">● LIVE</span>
+    }
+    @if (code) {
+    <div class="code-box">YOUR CODE: <strong>{{ code }}</strong></div>
+    }
+</div>

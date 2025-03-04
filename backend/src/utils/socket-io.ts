@@ -26,7 +26,10 @@ export const socketConnection = (server: any) => {
 
         socket.on('setBias', (char: string) => {
             if (/^[a-z]$/.test(char)) {
-                socket.emit('gridUpdate', gridSrv.setBiasChar(char));
+                socket.emit('charDisable', {value: true, char: char});
+                setTimeout(() => {
+                    socket.emit('charDisable', {value: false, char: ''});
+                }, 4000)
             }
         });
 
@@ -39,4 +42,4 @@ export const socketConnection = (server: any) => {
     });
 }
 
-export const sendGrid = (data: any) => io.emit('gridUpdated', JSON.stringify(data));
+export const sendGrid = (data: any) => io.emit('gridUpdated', data);
