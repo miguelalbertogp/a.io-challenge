@@ -41,7 +41,7 @@ Before running the project, ensure you have the following installed:
     
     The frontend will run on `http://localhost:4200`.
 
- ## ## Docker Setup
+ ## Docker Setup
  If you prefer to run the project using Docker, follow these steps:
 
 1.  Ensure Docker and Docker Compose are installed.
