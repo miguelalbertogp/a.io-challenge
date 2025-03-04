@@ -1,1 +1,41 @@
-<p>payments works!</p>
+<div class="status">
+    @if(live) {
+    <span class="live">● LIVE</span>
+    }
+    @if (code) {
+    <div class="code-box">YOUR CODE: <strong>{{ code }}</strong></div>
+    }
+</div>
+
+<form [formGroup]="generalForm">
+    <div class="controls">
+        <div class="input-group">
+            <label for="payment">PAYMENT</label>
+            <input id="payment" type="text" formControlName="payment" placeholder="Payment" />
+        </div>
+        <div class="input-group">
+            <label for="ammount">AMMOUNT</label>
+            <input id="ammount" type="number" min="0" formControlName="ammount" placeholder="ammount" />
+        </div>
+        <button class="button" (click)="addPayment()">+ ADD</button>
+    </div>
+</form>
+
+<table>
+    <thead>
+        <th class="td-text">NAME</th>
+        <th class="td-number">AMMOUNT</th>
+        <th class="td-number">CODE</th>
+        <th class="td-number">GRID</th>
+    </thead>
+    <tbody>
+        @for (row of payments; track $index) {
+        <tr>
+            <td class="td-text">{{row.name}}</td>
+            <td class="td-number">{{row.ammount}}</td>
+            <td class="td-number">{{row.code}}</td>
+            <td class="td-number">100</td>
+        </tr>
+        }
+    </tbody>
+</table>

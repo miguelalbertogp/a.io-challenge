@@ -1,4 +1,4 @@
-export interface Payment {
+export interface PaymentModel {
     id?: string;
     name: string;
     ammount: number;

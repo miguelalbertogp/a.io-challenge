@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SocketService } from '../services/socket.service';
 
 @Component({
@@ -16,7 +16,6 @@ export class GridComponent implements OnDestroy, OnInit {
   live: boolean = false;
 
   constructor(
-    private fb: FormBuilder,
     private socketService: SocketService
   ) {
     this.gridData = Array(10).fill(Array(10).fill(""));
@@ -43,7 +42,6 @@ export class GridComponent implements OnDestroy, OnInit {
     this.socketService.receiveMessage('gridUpdated', (data) => {
       if (data.grid) this.gridData = data.grid;
       if (data.code) this.code = data.code;
-      console.log('%csrc/app/grid/grid.component.ts:46 data.grid', 'color: #007acc;', JSON.stringify(data.grid));
     });
     this.socketService.receiveMessage('charDisable', (data) => {
       if (data.value === true) {
