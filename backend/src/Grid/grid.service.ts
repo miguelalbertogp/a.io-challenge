@@ -1,4 +1,4 @@
-import { sendGrid } from '../utils/socket-io';
+import { sendMessage } from '../utils/socket-io';
 
 type Grid = string[][];
 const GRID_SIZE = 10;
@@ -26,7 +26,7 @@ export class GridService {
         return grid;
     };
 
-    getCurrentGrid = () : Grid => {
+    getCurrentGrid = (): Grid => {
         return currentGrid;
     }
 
@@ -70,12 +70,17 @@ export class GridService {
         const grid: Grid = this.generateGrid();
         currentGrid = grid
         const code = this.getCode();
-        sendGrid({ grid: currentGrid, code })
+        sendMessage('gridUpdated', { grid: currentGrid, code })
         return currentGrid
     };
 
     setBiasChar = (char: string) => {
+        sendMessage('charDisable', {value: true, char: char});
         biasCharacter = char;
+        setTimeout(() => {
+            this.clearBiasChar();
+            sendMessage('charDisable', {value: false, char: ''});
+        }, 4000)
     }
 
     clearBiasChar = () => {

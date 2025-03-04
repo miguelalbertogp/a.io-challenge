@@ -17,14 +17,14 @@ router.get('/:id', async (req: Request, res: Response) => {
 });
 
 router.post('/', async (req: Request, res: Response) => {
-    const { name, amount, code, grid } = req.body;
-    const payment = await paymentSrv.create({ name, amount });
+    const { name, ammount } = req.body;
+    const payment = await paymentSrv.create({ name, ammount });
     res.status(201).json(payment);
 });
 
 router.put('/:id', async (req: Request, res: Response) => {
-    const { name, amount } = req.body;
-    const updatedPayment = await paymentSrv.update(req.params.id, { name, amount });
+    const { name, ammount } = req.body;
+    const updatedPayment = await paymentSrv.update(req.params.id, { name, ammount });
     if (!updatedPayment) return res.status(404).json({ error: 'Payment not found' });
     res.json(updatedPayment);
 });
