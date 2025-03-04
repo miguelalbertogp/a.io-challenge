@@ -8,7 +8,7 @@ This project consists of a **backend** built with Node.js/Express and a **fronte
 
 Before running the project, ensure you have the following installed:
 
--  **Node.js** (v16 or higher)
+-  **Node.js** (v22 or higher)
 
 -  **npm** (Node Package Manager)
 
