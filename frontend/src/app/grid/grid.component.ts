@@ -43,7 +43,7 @@ export class GridComponent implements OnDestroy, OnInit {
     this.socketService.receiveMessage('gridUpdated', (data) => {
       if (data.grid) this.gridData = data.grid;
       if (data.code) this.code = data.code;
-      console.log('%csrc/app/grid/grid.component.ts:46 data.grid', 'color: #007acc;', data.grid);
+      console.log('%csrc/app/grid/grid.component.ts:46 data.grid', 'color: #007acc;', JSON.stringify(data.grid));
     });
     this.socketService.receiveMessage('charDisable', (data) => {
       if (data.value === true) {

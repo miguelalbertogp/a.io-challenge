@@ -8,18 +8,18 @@ let biasCharacter: string | null = null;
 export class GridService {
     gridInterval: any = null;
 
-    generateGrid = (bias: string | null = null): Grid => {
+    generateGrid = (): Grid => {
         let grid: Grid = Array.from({ length: GRID_SIZE }, () =>
             Array.from({ length: GRID_SIZE }, () => String.fromCharCode(97 + Math.floor(Math.random() * 26)))
         );
 
-        if (bias) {
+        if (biasCharacter) {
             const totalCells = GRID_SIZE * GRID_SIZE;
             const biasCells = Math.floor(totalCells * 0.2);
             for (let i = 0; i < biasCells; i++) {
                 const row = Math.floor(Math.random() * GRID_SIZE);
                 const col = Math.floor(Math.random() * GRID_SIZE);
-                grid[row][col] = bias;
+                grid[row][col] = biasCharacter;
             }
         }
 
@@ -67,7 +67,7 @@ export class GridService {
     }
 
     updateGrid = () => {
-        const grid: Grid = this.generateGrid(biasCharacter);
+        const grid: Grid = this.generateGrid();
         currentGrid = grid
         const code = this.getCode();
         sendGrid({ grid: currentGrid, code })
@@ -76,6 +76,10 @@ export class GridService {
 
     setBiasChar = (char: string) => {
         biasCharacter = char;
+    }
+
+    clearBiasChar = () => {
+        biasCharacter = null;
     }
 
     startGridGeneration = () => {

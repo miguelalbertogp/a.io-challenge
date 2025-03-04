@@ -26,8 +26,10 @@ export const socketConnection = (server: any) => {
 
         socket.on('setBias', (char: string) => {
             if (/^[a-z]$/.test(char)) {
+                gridSrv.setBiasChar(char);
                 socket.emit('charDisable', {value: true, char: char});
                 setTimeout(() => {
+                    gridSrv.clearBiasChar();
                     socket.emit('charDisable', {value: false, char: ''});
                 }, 4000)
             }
