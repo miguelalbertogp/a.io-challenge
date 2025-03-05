@@ -1,4 +1,4 @@
-# i.io-challenge
+# a.io-challenge
 
 This project consists of a **backend** built with Node.js/Express and a **frontend** built with Angular. The backend generates a 10x10 grid of random alphabetic characters and a 2-digit code based on a specific algorithm. The frontend displays the grid and code, which are updated every 2 seconds.
 
